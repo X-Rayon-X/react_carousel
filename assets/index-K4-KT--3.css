@@ -1,0 +1,1 @@
+.Carousel{width:calc(var(--size-image) * var(--frame-size));overflow:hidden;white-space:nowrap}ul{padding:0}ul li{display:inline-block;width:var(--size-image);height:var(--size-image);transition:transform var(--animation-duration) ease;transform:translate(var(--x))}ul li img{width:100%}
