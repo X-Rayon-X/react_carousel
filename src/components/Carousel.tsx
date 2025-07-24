@@ -19,12 +19,7 @@ const Carousel: React.FC<Props> = ({
   infinite,
 }) => {
   const [valueX, setValueX] = useState(0);
-  const [countStepPrev, setCountStepPrev] = useState(-1);
-  const [countStepNext, setCountStepNext] = useState(
-    Math.floor(images.length / step - 1),
-  );
-  const correctStepPrev = countStepPrev !== 0 ? step : images.length % step;
-  const correctStepNext = countStepNext !== 0 ? step : images.length % step;
+  const maxOffset = images.length - frameSize;
 
   return (
     <div
@@ -51,15 +46,13 @@ const Carousel: React.FC<Props> = ({
         onClick={() =>
           setValueX(prev => {
             {
-              setCountStepPrev(countStepPrev - 1);
-              setCountStepNext(countStepNext + 1);
-              if (infinite) {
-                return prev < 0
-                  ? prev + itemWidth * correctStepPrev
-                  : -itemWidth * (images.length - frameSize);
+              const prevIndex = Math.abs(prev / itemWidth) - step;
+
+              if (prevIndex < 0) {
+                return infinite ? -itemWidth * maxOffset : 0;
               }
 
-              return prev < 0 ? prev + itemWidth * correctStepPrev : prev;
+              return prev + itemWidth * step;
             }
           })
         }
@@ -71,17 +64,13 @@ const Carousel: React.FC<Props> = ({
         data-cy="next"
         onClick={() =>
           setValueX(prev => {
-            setCountStepPrev(countStepPrev + 1);
-            setCountStepNext(countStepNext - 1);
-            if (infinite) {
-              return prev > -itemWidth * (images.length - frameSize)
-                ? prev - itemWidth * correctStepNext
-                : 0;
+            const nextIndex = Math.abs(prev / itemWidth) + step;
+
+            if (nextIndex + frameSize > images.length) {
+              return infinite ? 0 : -itemWidth * maxOffset;
             }
 
-            return prev > -itemWidth * (images.length - frameSize)
-              ? prev - itemWidth * correctStepNext
-              : prev;
+            return prev - itemWidth * step;
           })
         }
       >
