@@ -36,7 +36,7 @@ const Carousel: React.FC<Props> = ({
       <ul className="Carousel__list">
         {images.map((img, index) => (
           <li key={index}>
-            <img src={img} alt={`${index + 1}`} />
+            <img src={img} alt={`${index + 1}`} width={itemWidth} />
           </li>
         ))}
       </ul>

@@ -4,9 +4,9 @@ import Carousel from './components/Carousel';
 
 interface State {
   images: string[];
-  itemWidth: number;
-  frameSize: number;
-  step: number;
+  itemId: number;
+  frameId: number;
+  stepId: number;
   animationDuration: number;
 }
 
@@ -24,9 +24,9 @@ class App extends React.Component<{}, State> {
       './img/9.png',
       './img/10.png',
     ],
-    step: 3,
-    frameSize: 3,
-    itemWidth: 130,
+    stepId: 3,
+    frameId: 3,
+    itemId: 130,
     animationDuration: 1000,
   };
 
@@ -39,8 +39,7 @@ class App extends React.Component<{}, State> {
   };
 
   render() {
-    const { images, step, itemWidth, frameSize, animationDuration } =
-      this.state;
+    const { images, stepId, itemId, frameId, animationDuration } = this.state;
 
     return (
       <div className="App">
@@ -49,9 +48,9 @@ class App extends React.Component<{}, State> {
 
         <Carousel
           images={images}
-          step={step}
-          frameSize={frameSize}
-          itemWidth={itemWidth}
+          step={stepId}
+          frameSize={frameId}
+          itemWidth={itemId}
           animationDuration={animationDuration}
           infinite={false}
         />
@@ -60,7 +59,7 @@ class App extends React.Component<{}, State> {
         <input
           id="itemId"
           type="number"
-          value={itemWidth}
+          value={itemId}
           onChange={this.handleChangeInput}
         />
 
@@ -68,7 +67,7 @@ class App extends React.Component<{}, State> {
         <input
           id="frameId"
           type="number"
-          value={frameSize}
+          value={frameId}
           onChange={this.handleChangeInput}
         />
 
@@ -76,7 +75,7 @@ class App extends React.Component<{}, State> {
         <input
           id="stepId"
           type="number"
-          value={step}
+          value={stepId}
           onChange={this.handleChangeInput}
         />
 
